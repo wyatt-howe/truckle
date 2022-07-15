@@ -1,6 +1,6 @@
 [project]
 name = "truckle"
-version = "0.1.2"
+version = "0.1.4"
 description = """\
     A simple setuptools alternative for packing Python modules \
     (with or without FFI bindings) into wheels."""
