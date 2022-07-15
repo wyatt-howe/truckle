@@ -39,7 +39,7 @@ Examples
 .. |truckle| replace:: ``truckle``
 .. _truckle: https://truckle.readthedocs.io/en/0.1.0/_source/truckle.html#truckle.truckle.truckle
 
-The function |truckle|_ is an efficient implementation of the `extended Euclidean algorithm <https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm>`__. It accepts two integer inputs ``b`` and ``n``, returning a tuple of the form ``(gcd(b, n), a, m)`` where the three integers in the tuple satisfy the `identity <https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity>`__ ``(a * b) + (n * m) == gcd(b, n)``::
+The function |truckle|_ can be used as follows:
 
     >>> path_to_wheel = truckle.truckle("/Documents/GitHub/mclbn256/")
     `mclbn256` v0.3.5 wheel built at /home/Documents/GitHub/mclbn256/mclbn256-0.3.5-cp39-abi3-macosx_12_0_arm64.whl
