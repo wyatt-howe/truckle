@@ -1,5 +1,5 @@
 =======
-truckle
+truckle [UNMAINTAINED]
 =======
 
 A simple setuptools alternative for packing Python modules (with or without FFI bindings) into
