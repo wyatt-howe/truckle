@@ -48,6 +48,8 @@ The function |truckle|_ can be used as follows:
 
 Development
 -----------
+This library was written with haste, is not being maintained and will never be updated... so fork at your own risk!
+
 All installation and development dependencies are fully specified in ``pyproject.toml``. The ``project.optional-dependencies`` object is used to `specify optional requirements <https://peps.python.org/pep-0621>`__ for various development tasks. This makes it possible to specify additional options (such as ``docs``, ``lint``, and so on) when performing installation using `pip <https://pypi.org/project/pip>`__::
 
     python -m pip install .[docs,lint]
