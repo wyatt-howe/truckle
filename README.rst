@@ -41,7 +41,7 @@ Examples
 
 The function |truckle|_ can be used as follows:
 
-    >>> path_to_wheel = truckle.truckle("/Documents/GitHub/mclbn256/")
+    >>> path_to_wheel = truckle.truckle("/Documents/GitHub/mclbn256/pyproject.toml")
     `mclbn256` v0.3.5 wheel built at /home/Documents/GitHub/mclbn256/mclbn256-0.3.5-cp39-abi3-macosx_12_0_arm64.whl
     >>> path_to_wheel
     '/home/Documents/GitHub/mclbn256/mclbn256-0.3.5-cp39-abi3-macosx_12_0_arm64.whl'
