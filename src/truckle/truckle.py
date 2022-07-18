@@ -15,7 +15,7 @@ import toml
 from packaging.tags import platform_tags
 
 
-def truckle(pyproject_path: str, minor_version: Union[str,int] = None, wheel_file_name: str = None, platform_tag: str = None) -> str:
+def truckle(pyproject_path: str, wheel_file_name: str = None, platform_tag: str = None) -> str:
     # pylint: disable=C0301 # Accommodates long link URLs.
     """
     Build a wheel.
@@ -31,8 +31,6 @@ def truckle(pyproject_path: str, minor_version: Union[str,int] = None, wheel_fil
     infofile = 'pyproject.standalone.toml' if 'pyproject.standalone.toml' in pyproject_path else ('pyproject.toml' if 'pyproject.toml' in pyproject_path else None)
     project_root = pyproject_path[:-len(infofile)]
 
-    minor_version = minor_version or sys.version_info.minor
-
     with open(pyproject_path, 'r') as fd:
         pyproject = toml.loads(fd.read())
         fd.close()
@@ -40,8 +38,8 @@ def truckle(pyproject_path: str, minor_version: Union[str,int] = None, wheel_fil
     # {distribution}-{version}(-{build tag})?-{python tag}-{abi tag}-{platform tag}.whl
     wheel_file_name = wheel_file_name or F"{pyproject['project']['name']}-" \
                                          F"{pyproject['project']['version']}-" \
-                                         F"cp3{minor_version}-" \
-                                         F"abi3-" \
+                                         F"py3-" \
+                                         F"none-" \
                                          F"{plattag}" \
                                          F".whl"
 
@@ -85,10 +83,10 @@ def truckle(pyproject_path: str, minor_version: Union[str,int] = None, wheel_fil
 
     wheel = ('WHEEL', F"Wheel-Version: 1.0\n" \
                       F"Generator: truckle (0.1.x)\n" \
-                      F"Root-Is-Purelib: false\n" \
-                      F"Tag: {plattag}\n\n".encode('ascii'))
-                      # F"Tag: cp3{minor_version}-cp3{minor_version}m-manylinux_2_17_x86_64\n" \
-                      # F"Tag: cp3{minor_version}-cp3{minor_version}m-manylinux2014_x86_64\n\n".encode('ascii'))
+                      F"Root-Is-Purelib: false\n".encode('ascii') +
+                     b"\n".join(F"Tag: {tag}".encode('ascii') for tag in plattag.split('.')) + b"\n\n")
+
+    print(wheel[1].decode())
 
     toplevel = ('top_level.txt', F"{pyproject['project']['name']}\n".encode())
 
@@ -176,9 +174,5 @@ if __name__ == "__main__":
     doctest.testmod()  # pragma: no cover
     # truckle('/Users/whowe/Documents/GitHub/mclbn256/setup.cfg')
     plattag = None
-    truckle('/Users/whowe/Documents/GitHub/mclbn256/pyproject.standalone.toml', minor_version=6, platform_tag=plattag)
-    truckle('/Users/whowe/Documents/GitHub/mclbn256/pyproject.standalone.toml', minor_version=7, platform_tag=plattag)
-    truckle('/Users/whowe/Documents/GitHub/mclbn256/pyproject.standalone.toml', minor_version=8, platform_tag=plattag)
-    truckle('/Users/whowe/Documents/GitHub/mclbn256/pyproject.standalone.toml', minor_version=9, platform_tag=plattag)
-    truckle('/Users/whowe/Documents/GitHub/mclbn256/pyproject.standalone.toml', minor_version=10, platform_tag=plattag)
+    truckle('/Users/whowe/Documents/GitHub/mclbn256/pyproject.standalone.toml', platform_tag=plattag)
     # truckle('/Users/whowe/Documents/GitHub/truckle/pyproject.toml')
